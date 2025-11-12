@@ -159,10 +159,10 @@ public class LoginTestCase {
         HttpClient client = HttpClient.newBuilder().build();
         String url = "https://api.gearmentinc.com/iam/api.iam.v1.UserAccountAPI/UserLogin";
         String sampleEmail =  UUID.randomUUID().toString().replace("-", "") + "@gearment.com";
+        String password = "Test@123";
         ObjectMapper mapper = new ObjectMapper();
 
         for (int i = 1; i <= 5; i++) {
-            String password = "Test@123";
             String body = String.format("{\"email\":\"%s\",\"password\":\"%s\"}", sampleEmail, password);
 
             HttpRequest req = HttpRequest.newBuilder()
