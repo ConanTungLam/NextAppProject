@@ -1,4 +1,4 @@
-package STG;
+package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 
 
-public class LoginTestCase {
+public class SampleTrash {
 
     @Test(priority = 1)
     void successfullyWithValidAccount(){
@@ -32,8 +32,8 @@ public class LoginTestCase {
         wait.until(
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector("button[type='submit']"))
         );
-        driver.findElement(By.xpath("//input[@name='email']")).sendKeys("lamvt@gearment.com");
-        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Admin@12345");
+        driver.findElement(By.xpath("//input[@name='email']")).sendKeys("lamvt+selenium@gearment.com");
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Admin@123");
         driver.findElement(By.cssSelector("button[type=submit]")).click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(
@@ -54,13 +54,13 @@ public class LoginTestCase {
         HttpRequest resetLoginReq = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("{\"email\":\"lamvt@gearment.com\",\"password\":\"Admin@12345\"}"))
+                .POST(HttpRequest.BodyPublishers.ofString("{\"email\":\"lamvt+selenium@gearment.com\",\"password\":\"Admin@123\"}"))
                 .build();
         client.send(resetLoginReq, HttpResponse.BodyHandlers.discarding());
 
         for (int i = 1; i <= 5; i++) {
-            String password = (i < 5) ? "Admin@1234" : "Admin@12345";
-            String body = String.format("{\"email\":\"lamvt@gearment.com\",\"password\":\"%s\"}", password);
+            String password = (i < 5) ? "Wr0ngP@ss0rd" : "Admin@123";
+            String body = String.format("{\"email\":\"lamvt+selenium@gearment.com\",\"password\":\"%s\"}", password);
 
             HttpRequest req = HttpRequest.newBuilder()
                     .uri(URI.create(url))
@@ -98,8 +98,8 @@ public class LoginTestCase {
         wait.until(
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector("button[type='submit']"))
         );
-        driver.findElement(By.xpath("//input[@name='email']")).sendKeys("lamvt@gearment.com");
-        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Tunglam@955");
+        driver.findElement(By.xpath("//input[@name='email']")).sendKeys("lamvt+selenium@gearment.com");
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Wr0ngP@ssw0rd");
         driver.findElement(By.cssSelector("button[type=submit]")).click();
         wait.until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@variant='error'][2]"))
@@ -159,7 +159,7 @@ public class LoginTestCase {
         HttpClient client = HttpClient.newBuilder().build();
         String url = "https://api.gearmentinc.com/iam/api.iam.v1.UserAccountAPI/UserLogin";
         String sampleEmail =  UUID.randomUUID().toString().replace("-", "") + "@gearment.com";
-        String password = "Test@123";
+        String password = "Wr0ngP@ssw0rd";
         ObjectMapper mapper = new ObjectMapper();
 
         for (int i = 1; i <= 5; i++) {
